@@ -1,0 +1,7 @@
+.backGround{
+    height: 100vh;
+    background-image: linear-gradient(to right, white, 10%, rgb(255, 211, 160));
+}
+.emojis{
+    font-size: 2.5rem;
+}

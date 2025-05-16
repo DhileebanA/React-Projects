@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Name Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #C7E1EF;
+            color: #333;
+        }
+
+        h1 {
+            color: #FF2D00;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input[type="text"],
+        .input-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .print-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .employee-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .employee-list li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 align="center"><FONT color=#8E1010>AI AIRPORT SERVICES LIMITED</FONT></h2>
+    <h3 align="center"><FONT color=#8E1010>RANDOM SELECTOR FOR BREATH ANALYSING EXAMINATION</FONT></h3>
+    <h4>Ref No:GSD/MAA/BA-TEST/ <span id="runCount"></span></h3>
+    <label for="textbox">STATION NAME:</label>
+    <input type="text" id="textbox" name="textbox">
+    <br>
+
+    <div class="input-group">
+        <label>Enter Operators Name:</label>
+        <input type="text" id="workingEmployeeInput" placeholder="Enter a working employee" required>
+        <button class="btn" onclick="addWorkingEmployee()">Add Working Employee</button>
+    </div>
+    <br>
+    <div class="input-group">
+        <label>Enter Absent/Not Reported Employees:</label>
+        <input type="text" id="absentEmployeeInput" placeholder="Enter an absent employee" required>
+        <button class="btn" onclick="addAbsentEmployee()">Add Absent Employee</button>
+    </div>
+
+    <div class="input-group">
+        <label for="fileInput">Upload Excel File:</label>
+        <input type="file" id="fileInput" accept=".xls,.xlsx">
+    </div>
+    
+    <div class="input-group">
+        <button id="random" class="btn" onclick="handleFile()">Process Excel File</button>
+    </div>
+    
+    <div class="input-group">
+        <button id="random" class="btn" onclick="selectRandomEmployees()">Select Random Employees</button>
+    </div>
+    
+    <h3>Selected Equipment Operators :</h3>
+    <div class="result" id="result"></div>
+
+    <div class="print-button">
+        <button class="btn" onclick="printPage()">Print</button>
+    </div>
+
+    <h3>Operators name list as per Duty Roster :</h3>
+    <ul class="employee-list" id="workingEmployeeList"></ul>
+
+    <h3>Absentees/Not Reported:</h3>
+    <ul class="employee-list" id="absentEmployeeList"></ul>
+    <h4 align="right" id="currentDateTime"></h4>
+</div>
+
+<script>
+    // Track the number of times the code has been run
+    var executionCount = 0;
+
+    // Function to add working employees names to the list and display them
+    function addWorkingEmployee() {
+        var workingEmployeeInput = document.getElementById('workingEmployeeInput');
+        var workingEmployee = workingEmployeeInput.value.trim();
+
+        if (workingEmployee !== '') {
+            var workingEmployeeList = document.getElementById('workingEmployeeList');
+            workingEmployeeList.innerHTML += '<li>' + workingEmployee + '</li>';
+            workingEmployeeInput.value = '';
+        } else {
+            alert('Please enter a valid working employee name!');
+        }
+    }
+
+    // Function to add absent employees names to the list and display them
+    function addAbsentEmployee() {
+        var absentEmployeeInput = document.getElementById('absentEmployeeInput');
+        var absentEmployee = absentEmployeeInput.value.trim();
+
+        if (absentEmployee !== '') {
+            var absentEmployeeList = document.getElementById('absentEmployeeList');
+            absentEmployeeList.innerHTML += '<li>' + absentEmployee + '</li>';
+            absentEmployeeInput.value = '';
+        } else {
+            alert('Please enter a valid absent employee name!');
+        }
+    }
+
+    // Function to handle uploaded Excel file
+    function handleFile() {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a file.');
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            var data = event.target.result;
+            processData(data);
+        };
+
+        reader.readAsBinaryString(file);
+    }
+
+    // Function to process Excel data
+    function processData(data) {
+        var workbook = XLSX.read(data, {type: 'binary'});
+        var firstSheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[firstSheetName];
+        var data = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+
+        // Get present and absent names
+        var presentNames = [];
+        var absentNames = [];
+        let col = 10;
+        let i = 0;
+        let unCount = 0;
+        let pattern = /.*?(?=[(*])/gm;
+        let match;
+
+        for (var row = 5; row < data.length; row++) {
+            console.log(data[row][col])
+            if(data[row][col]){
+                if (data[row][col].toLowerCase() == 'p') {
+                    match = data[row][col-2].match(pattern);
+                    presentNames.push(match[0]);
+                } else if (data[row][col].toLowerCase() == 'a') {
+                    match = data[row][col-2].match(pattern);
+                    absentNames.push(match[0]);
+                }
+            } else if(unCount>3 && i<=3) {
+                row = 5;
+                col += 6;
+                unCount = 0;
+                i++;
+            } else{
+                unCount++;
+            }
+        }
+
+        // Display present names
+        var workingEmployeeList = document.getElementById('workingEmployeeList');
+        workingEmployeeList.innerHTML += `${presentNames.map(value=>{return `<li>${value}</li>`})}`;
+
+        // Display absent names
+        var absentEmployeeList = document.getElementById('absentEmployeeList');
+        absentEmployeeList.innerHTML += `${absentNames.map(value=>{return `<li>${value}</li>`})}`;
+       
+    }
+    // Function to randomly select 10% of working employees
+    function selectRandomEmployees() {
+        var workingEmployeeList = document.getElementById('workingEmployeeList');
+        var workingEmployees = workingEmployeeList.getElementsByTagName('li');
+
+        if (workingEmployees.length === 0) {
+            alert('Please enter working employee names before selecting!');
+            return;
+        }
+
+        var numEmployees = Math.ceil(workingEmployees.length * 0.1);
+        var selectedEmployees = [];
+
+        while (selectedEmployees.length < numEmployees) {
+            var randomIndex = Math.floor(Math.random() * workingEmployees.length);
+            var randomEmployee = workingEmployees[randomIndex].innerText;
+
+            if (!selectedEmployees.includes(randomEmployee)) {
+                selectedEmployees.push(randomEmployee);
+            }
+        }
+
+        var result = document.getElementById('result');
+        result.innerHTML = 'Selected Employees: ' + selectedEmployees.join('  ');
+
+        // Compare with absent employees and remove identically matching names
+        var absentEmployeeList = document.getElementById('absentEmployeeList');
+        var absentEmployees = absentEmployeeList.getElementsByTagName('li');
+
+        for (var i = 0; i < absentEmployees.length; i++) {
+            var absentEmployee = absentEmployees[i].innerText;
+
+            if (selectedEmployees.includes(absentEmployee)) {
+                // Remove the employee from the final list
+                selectedEmployees.splice(selectedEmployees.indexOf(absentEmployee), 1);
+            }
+        }
+
+                // Disable the button to prevent further picks
+        document.getElementById("random").disabled = true;
+
+        // Update execution count and display it
+        executionCount++;
+        var executionCountElement = document.getElementById('executionCount');
+        executionCountElement.innerHTML = 'Number of times the code has been run: ' + executionCount;
+
+        // Send email with the final list of employees
+        sendEmail(selectedEmployees);
+    }
+
+    // Function to send email
+    function sendEmail(employees) {
+        var emailList = 'techsupportmaa@aiasl.in';
+        var emailBody = 'Final List of Employees:\n\n' + employees.join('\n');
+
+        // Construct the mailto URL
+        var mailtoUrl = 'mailto:' + emailList +
+            '?subject=Final List of Employees' +
+            '&body=' + encodeURIComponent(emailBody);
+
+        // Open the email client with the mailto URL
+        window.open(mailtoUrl);
+    }
+
+    // Function to print the final output
+    function printPage() {
+        window.print();
+    }
+
+    // Update current date and time
+    function updateDateTime() {
+        var dateTimeElement = document.getElementById('currentDateTime');
+        var now = new Date();
+        dateTimeElement.innerHTML = now.toLocaleString();
+    }
+    // Update current date and time every second
+    setInterval(updateDateTime, 1000);
+
+    // Display the number of times the code has run
+    var runCountElement = document.getElementById('runCount');
+    var runCount = localStorage.getItem('runCount');
+    runCount = runCount ? parseInt(runCount) + 1 : 1;
+    runCountElement.textContent = runCount;
+    localStorage.setItem('runCount', runCount);
+</script>
+<script src="./node_modules/xlsx/dist/xlsx.mini.min.js">
+    
+</script>
+</body>
+</html>

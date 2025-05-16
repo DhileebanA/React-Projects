@@ -1,0 +1,22 @@
+.container{
+    height: 100vh;
+}
+
+.ball{
+    /* height: 50px; */
+    width: 400px;
+    /* background-image: linear-gradient(to right, aqua, rgb(237, 82, 224)); */
+    border-radius: 10px 50px 100px 0px;
+    padding: 15px 0px;
+    border-bottom: 2px solid rgb(163, 163, 163);
+}
+p{
+    width: fit-content;
+    margin: auto;
+}
+.ball2{
+    height: 10px;
+    width: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}

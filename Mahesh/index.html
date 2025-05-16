@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        .container{
+            animation: rotate 2s infinite;
+            transform: rotateY(45deg);
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            /* position: relative; */
+            /* animation: move 2s infinite; */
+        }
+        /* @keyframes move{
+            0%{
+                left: 0;
+            }
+            50%{
+                left: 100px;
+            }
+            100%{
+                left: 0;
+            }
+        } */
+        /* @keyframes rotate{
+            0%{
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            100%{
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        } */
+        body{
+            height: 100vh;
+            /* background-image: url(mahalakshmi.png); */
+        }
+     </style>
+</head>
+<body>
+    <hr>
+    <form id="signupForm">
+        <label for="identity">ID : </label>
+        <input type="text" id="identity" name="id"><br>
+        <label for="username">Full Name : </label>
+        <input type="text" id="username" name="name"><br>
+        <label for="grade">Grade : </label>
+        <input type="text" id="grade" name="grade"><br>
+        <!-- <label for="">Date of Birth : </label>
+        <input type="date"><br>
+        <label for="">Departure : </label>
+        <input type="time"><br>
+        <input type="color"><br>
+        <input min="18" type="number" title="Enter correctly"><br> -->
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        import axios from 'axios';
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(this);
+            console.log('Form Data:', Object.fromEntries(formData.entries()));
+
+            axios.post('http://localhost:5000/api/users/signup', Object.fromEntries(formData.entries()))
+                .then(response => console.log('Response:', response.data))
+                .catch(error => console.error('Error:', error));
+
+            // fetch('http://localhost:8080/api/users/signup', { method: 'POST', body: JSON.stringify(Object.fromEntries(formData.entries())) })
+            //     .then(response => response.json())
+            //     .then(data => console.log('Response:', data))
+            //     .catch(error => console.error('Error:', error));
+        });
+    </script>
+    <div class="container">
+        <div class="box1"></div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital@1&family=Bree+Serif&family=Caveat:wght@700&family=Indie+Flower&family=Josefin+Sans:wght@700&family=Kaushan+Script&family=Lilita+One&family=Open+Sans:wght@500&family=Roboto+Slab:wght@900&family=Roboto:wght@500&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+/* Hello World */
+.headingHello{
+  color: crimson;
+}
+
+/* Congrats Card */
+.mainBgCong{
+  background-image: url(https://assets.ccbp.in/frontend/react-js/congrats-card-bg.png);
+  height: 100vh;
+}
+.midBgCong{
+  background-color: aquamarine;
+}
+
+/* Super Over League */
+.mainBgLeague{
+  background-color: rgb(11, 11, 36);
+  height: 100vh;
+}
+.leagueImg{
+  height: 20rem;
+}
+
+/* Social Button */
+.mainBgSocial{
+  background-image: url(https://freerangestock.com/sample/137609/night-sky--starry-sky-over-the-horizon.jpg);
+  background-size: cover;
+  height: 100vh;
+}
+.mainBgSocial h1{
+  font-family: 'Roboto Slab', serif;
+}
+.midBgSocial .btn{
+  font-size: small;
+}
+.mainNotify{
+  width: 30vw;
+}
+
+/* Member Login */
+
+.memBody{
+  background-image: linear-gradient(to right, purple,rgb(165, 0, 124));
+  height: 91vh;
+}
+.loginImg{
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+}
+#reUse{
+  align-items: start;
+}
+
+.bgTextBox{
+  background-color: lightgray;
+  height: 40px;
+}
+.borderTextBox{
+  border: none;
+  background-color: lightgray;
+  height: 40px;
+  padding-left: 10px;
+  outline: none;
+}
+
+/* Tecnology Cards */
+@media screen and (min-width:1300px){
+  .techMainSection .mainPara{
+    width: 60vw;
+  }
+  .techMainSection{
+    background-color: azure;
+    height:100vh;
+  }
+  #TechCardId{
+    width: 50vw;
+  }
+  .techMainSection .mainPara{
+    width: 60vw;
+  }
+}
+@media screen and (min-width:1024px){
+  .techMainSection .mainPara{
+    width: 90vw;
+  }
+  .techMainSection{
+    background-color: azure;
+    height:100vh;
+  }
+  .TechCardSection{
+    width: 50vw;
+  }
+  .techMainSection .mainPara{
+    width: 60vw;
+  }
+}
+@media screen and (min-width:576px){
+  .techMainSection{
+    background-color: azure;
+    height:100vh;
+  }
+  .TechCardSection{
+    width: 90vw;
+  }
+  .techMainSection .mainPara{
+    width: 80vw;
+  }
+}
+@media screen and (min-width:0px){
+  .techMainSection{
+    background-color: azure;
+    padding-top:50px;
+    padding-bottom: 50px;
+  }
+  .TechCardSection{
+    width: 90vw;
+  }
+}
+
+.TechCardSection .card-body, .TechCardSection .card{
+  border-radius: 20px;
+  border: none;
+}
+.TechCardBorColor1{
+  box-shadow: 0px -5px red;
+}
+.TechCardBorColor2{
+  box-shadow: 0px -5px rgb(4, 117, 161);
+}
+.TechCardBorColor3{
+  box-shadow: 0px -5px rgb(0, 194, 58);
+}
+.TechCardBorColor4{
+  box-shadow: 0px -5px rgb(255, 238, 0);
+}
+.techImg{
+  height: 100px;
+  width: 100px;
+}
+.menuNavbar li{
+  list-style-type: none;
+  text-decoration: none;
+}

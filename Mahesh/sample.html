@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: linear-gradient(to top right, rgb(7, 122, 184), blueviolet);
+            background-size: 100vw 100vh;
+        }
+        .navbar {
+            background-color: white;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0px 20px;
+        }
+        .logo {
+            height: inherit;
+            display: flex;
+        }
+        .navbar h2 {
+            margin: auto 0px;
+            color: rgb(7, 122, 184);
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 250px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .navbar li {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: blueviolet;
+        }
+        .navbar li:hover {
+            background-color: blueviolet;
+            border-radius: 10px 0px;
+            color: white;
+        }
+        .navbar li:active {
+            scale: 0.9;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .container img {
+            width: 50%;
+            height: 100%;
+        }
+        .container h1 {
+            text-decoration-line: underline;
+            text-decoration-color: rgb(231, 255, 17);
+            text-decoration-style: wavy;
+            text-decoration-thickness: 8px;
+            text-decoration: overline dashed rgb(4, 239, 0) 8px;
+            font-size: 50px;
+            color: white;
+        }
+        .container p {
+            text-shadow: 3px 5px 5px rgb(121, 0, 16);
+            text-wrap: normal;
+            font-size: 20px;
+            color: white;
+        }
+        .container button {
+            padding: 10px 20px;
+            background-color: white;
+            color: blueviolet;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .container img {
+                width: 100%;
+                height: auto;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tbody tr {
+                margin-bottom: 15px;
+            }
+            tbody td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+            tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://img.freepik.com/premium-vector/bird-logo-bird-wing-dove-logo-template-humming-bird-icon-logo-colorful-vector-web-image-vector-colle_1283069-15691.jpg?w=900" height="100%" alt="">
+                <h2>Dhilip</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Skill</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div>
+                <h1>Training Program</h1>
+                <p>Empowering India with Skill Development Programs & Service Projects. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam labore eligendi saepe repudiandae facere cupiditate accusamus soluta obcaecati culpa ratione. Laboriosam cum ipsam quidem ex reprehenderit debitis dolorum. At, suscipit.</p>
+                <button>Know More</button>
+            </div>
+            <img src="https://skills.ssrdp.org/wp-content/uploads/2024/06/3d-printing.jpg" alt="">
+        </div>
+        <section>
+            <div class="card">
+                <img src="" alt="">
+            </div>
+        </section>
+        <section>
+            <h2>Employee Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="ID">1</td>
+                        <td data-label="Name">John Doe</td>
+                        <td data-label="Position">Software Engineer</td>
+                        <td data-label="Department">IT</td>
+                    </tr>
+                    <tr>
+                        <td data-label="ID">2</td>
+                        <td data-label="Name">Jane Smith</td>
+                        <td data-label="Position">Project Manager</td>
+                        <td data-label="Department">Operations</td>
+                    </tr>
+                    <tr>
+                        <td data-label="ID">3</td>
+                        <td data-label="Name">Sam Wilson</td>
+                        <td data-label="Position">Designer</td>
+                        <td data-label="Department">Marketing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
