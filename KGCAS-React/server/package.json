@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "KGCAS Std Details",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon start",
+    "test": "npm install --save-dev jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DhileebanA/KGCAS-STD.git"
+  },
+  "author": "Project Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DhileebanA/KGCAS-STD/issues"
+  },
+  "homepage": "https://github.com/DhileebanA/KGCAS-STD#readme"
+}
